@@ -34,9 +34,9 @@ var restroomsArr = [
 // instructions for toggling groups of icons here: http://leafletjs.com/examples/layers-control.html
 var arrLength = restroomsArr.length;
 var a = 0;
-var bathrooms = new Array;
+var BATHROOMS = new Array;
 	for (i=0; i<arrLength; i++) {
-		bathrooms[a] = L.marker([restroomsArr[i], restroomsArr[i+=1]], {icon: bathIcon}).addTo(map).bindPopup("Restroom");
+		BATHROOMS[a] = L.marker([restroomsArr[i], restroomsArr[i+=1]], {icon: bathIcon}).addTo(map).bindPopup("Restroom");
 		a++;
 	}
 
@@ -51,9 +51,9 @@ var portablesArr = [
 //creating portables array
 var arrLength = portablesArr.length;
 var a = 0;
-var portables = new Array;
+var PORTABLES = new Array;
 for (i=0; i<arrLength; i++) {
-    portables[a] = L.marker([portablesArr[i], portablesArr[(i+=1)]], {icon: bathIconPortable}).addTo(map).bindPopup("Portable Toilet");
+    PORTABLES[a] = L.marker([portablesArr[i], portablesArr[(i+=1)]], {icon: bathIconPortable}).addTo(map).bindPopup("Portable Toilet");
 }
 
 //creating array with atm coords
@@ -68,13 +68,13 @@ var atmArr = [
 //creating atm's array
 var arrLength = atmArr.length;
 var a = 0;
-var atms = new Array;
+var ATM = new Array;
 for (i=0; i<arrLength; i++) {
-   atms[a] = L.marker([atmArr[i], atmArr[(i+=1)]], {icon: atmIcon}).addTo(map).bindPopup("ATM");
+   ATM[a] = L.marker([atmArr[i], atmArr[(i+=1)]], {icon: atmIcon}).addTo(map).bindPopup("ATM");
 }
 
 //ems Icon
-var ems = L.marker([61.581305, -149.134039], {icon: emsIcon}).addTo(map).bindPopup("I am an EMS Station");
+var EMS = L.marker([61.581305, -149.134039], {icon: emsIcon}).addTo(map).bindPopup("I am an EMS Station");
 
 //creating array with loading zone coords
 var loadingZoneArr = [
@@ -85,9 +85,9 @@ var loadingZoneArr = [
 //creating loading zones array
 var arrLength = loadingZoneArr.length;
 var a = 0;
-var loading = new Array;
+var LOADING = new Array;
 for (i=0; i<arrLength; i++) {
-    loading[a] = L.marker([loadingZoneArr[i], loadingZoneArr[(i+=1)]], {icon: loadingIcon}).addTo(map).bindPopup("ATM");
+    LOADING[a] = L.marker([loadingZoneArr[i], loadingZoneArr[(i+=1)]], {icon: loadingIcon}).addTo(map).bindPopup("ATM");
 }
 
 //red parking entrance 
