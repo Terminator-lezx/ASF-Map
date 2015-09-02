@@ -7,13 +7,7 @@ var overlayMaps = {
 	"Loading Zones": layersCollection.loadingZones.layers,
 	"EMS": layersCollection.ems.layers
  };
- 
-var grayscale = L.mapbox.tileLayer("alopexid.n9ih10h9");
-
-var baseLayers = {
-	"Greyscale": grayscale
-};
 
 /* ----------------------------- Layers Control ------------------------*/
 
-L.control.layers(baseLayers, overlayMaps).addTo(map);
+L.control.layers(null, overlayMaps).addTo(map);
