@@ -2,94 +2,62 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>Load GeoJSON</title>
+<title>Toggling layers</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
-<style>
-	body { margin:0; padding:0; perspective:1400; }
-	#map { 
-		position: absolute; 
-		top:0; 
-		bottom:0; 
-		width: 100%;
-		margin-top: 0px;
-		margin-bottom: 0;
-		transform:rotateX(-40deg); 
-		-webkit-transform:rotateX(-40deg);
-		z-index:1;
-	}
-	#controls {
-		position: absolute;
-		padding: 10px 25px 30px 25px;
-		box-shadow: 0px 0px 5px #444444;
-		width: 100%;
-		max-height: 600px;
-		margin-left: 0;
-		margin-right: 0;
-		margin-top: 0;
-		z-index:2;
-		background: #ffffff;
-	}
-</style>
+<link href='style/styles.css' rel='stylesheet' />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<!-- creating class and properties for icons  -->
+<script src="js/icons.js"></script>
+
+<!-- lat lng locations of interactive markers -->
+<script src="js/iconLocations.js"></script>
+
+<!-- static features for map -->
+<script src="js/geojson.js"></script>
+
+<!-- funcs for adding/removing layers -->
+<script src="js/funcs.js"></script>
+
 </head>
 <body>
-<div id="controls">
-<!-- control div -->
-	<div id="status">
-		<form>
-			<input type="radio" onclick= "Show_Div(restrooms);">Restrooms
-			<input type="radio" onclick= "Show_Div(portables);">Portable Toilets
-			<input type="radio" onclick= "Show_Div(atm);">ATM's
-			<input type="radio" onclick= "Show_Div(ems);">EMS 
-			<input type="radio" onclick= "Show_Div(loading);">Loading Zones
-			<input type="radio" onclick= "Show_Div(parking);">Parking
-			<input type="radio" onclick= "Show_Div(entryExit);">Entry / Exit
-	</div>
-	<div id="restrooms" style="display: none;">
-		restroom
-	</div>
-	<div id="portables" style="display: none;">
-		portable
-	</div>
-	<div id="atm" style="display: none;">
-		atm
-	</div>
-	<div id="ems" style="display: none;">
-		ems
-	</div>
-	<div id="loading" style="display: none;">
-		loading
-	</div>
-	<div id="parking" style="display: none;">
-		parking
-	</div>
-	<div id="entryExit" style="display: none;">
-		entry/exit
-	</div>
-</div>
+<!-- creating layer objects with internal arrays for grouping locations -->
+<script src="js/layersCollections.js"></script>
 
-<!-- showing/hiding divs -->
-<script src="js/hideShowDivs.js"></script>
+<!-- funcs for adding/removing layers -->
+<!-- layers toggle navigation -->
+<nav id='controls'>
+  <form>
+      <!-- currently only working with the "restroom" icon for testing -->
+      <input type="radio" onclick= "addLayerToMap(layersCollection.restroom.layers, layersCollection.restroom.name);">Restrooms
+      <input type="radio" >Portable Toilets
+      <input type="radio" >ATM's
+      <input type="radio" >EMS 
+      <input type="radio" >Loading Zones
+      <input type="radio" >Parking
+      <input type="radio" >Entry / Exit
+    </form>
+</nav>
 
-<!-- giving abilitiy to uncheck radio buttons -->
-<script src="js/uncheckRadio.js"></script>	
-	
+<!-- uncheck radio buttons -->
+<script>
+$(document).ready(function(){
+    $("input:radio:checked").data("chk",true);
+    $("input:radio").click(function(){
+        $("input[name='"+$(this).attr("name")+"']:radio").not(this).removeData("chk");
+        $(this).data("chk",!$(this).data("chk"));
+        $(this).prop("checked",$(this).data("chk"));
+    });
+});
+</script>
+
 <!-- map div -->
 <div id='map'></div>
 
-<!-- json file for most map features -->
-<script src="js/geojson.js"></script>
-
-<!-- creating map -->
+<!-- puting map in map div -->
 <script src="js/createMap.js"></script>
-
-<!-- creating icons and icon arrays and adding icons to map -->
-<script src="js/icons.js"></script>
-
-<!-- the major buildings will need static titles displayed, so they're organized here -->
-<script src="js/majorBuildings.js"></script>
 
 </body>
 </html>
