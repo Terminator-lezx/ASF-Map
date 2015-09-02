@@ -1,63 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=utf-8 />
-<title>Toggling layers</title>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
-<link href='style/styles.css' rel='stylesheet' />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <meta charset=utf-8 />
+  <title>Toggling layers</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+  <link href='style/styles.css' rel='stylesheet' />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
-<!-- creating class and properties for icons  -->
-<script src="js/icons.js"></script>
+  <!-- creating class and properties for icons  -->
+  <script src="js/icons.js"></script>
 
-<!-- lat lng locations of interactive markers -->
-<script src="js/iconLocations.js"></script>
+  <!-- lat lng locations of interactive markers -->
+  <script src="js/iconLocations.js"></script>
 
-<!-- static features for map -->
-<script src="js/geojson.js"></script>
+  <!-- creating layer objects with internal arrays for grouping locations -->
+  <script src="js/layersCollections.js"></script>
 
-<!-- funcs for adding/removing layers -->
-<script src="js/funcs.js"></script>
+  <!-- static features for map -->
+  <script src="js/geojson.js"></script>
 
 </head>
 <body>
-<!-- creating layer objects with internal arrays for grouping locations -->
-<script src="js/layersCollections.js"></script>
+  <!-- map div -->
+  <div id='map'></div>
 
-<!-- funcs for adding/removing layers -->
-<!-- layers toggle navigation -->
-<nav id='controls'>
-  <form>
-      <!-- currently only working with the "restroom" icon for testing -->
-      <input type="radio" onclick= "addLayerToMap(layersCollection.restroom.layers, layersCollection.restroom.name);">Restrooms
-      <input type="radio" >Portable Toilets
-      <input type="radio" >ATM's
-      <input type="radio" >EMS 
-      <input type="radio" >Loading Zones
-      <input type="radio" >Parking
-      <input type="radio" >Entry / Exit
-    </form>
-</nav>
+  <!-- puting map in map div -->
+  <script src="js/createMap.js"></script>
 
-<!-- uncheck radio buttons -->
-<script>
-$(document).ready(function(){
-    $("input:radio:checked").data("chk",true);
-    $("input:radio").click(function(){
-        $("input[name='"+$(this).attr("name")+"']:radio").not(this).removeData("chk");
-        $(this).data("chk",!$(this).data("chk"));
-        $(this).prop("checked",$(this).data("chk"));
-    });
-});
-</script>
-
-<!-- map div -->
-<div id='map'></div>
-
-<!-- puting map in map div -->
-<script src="js/createMap.js"></script>
+  <!-- adding controls -->
+  <script src="js/controls.js"></script>
 
 </body>
 </html>
