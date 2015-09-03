@@ -1,6 +1,7 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiYWxvcGV4aWQiLCJhIjoiNGRhOGQ0YWJjYWZiNjMwM2YyYmE1OTA1Nzc5ZWI5ODEifQ.qyNsa7LBqCtnA_wredr2UQ';
-var geojson = [
-	{
+//var geojson = [
+//	{
+var geojson = L.mapbox.featureLayer({
 	    "type": "FeatureCollection",
 	    "features": [
 
@@ -102,7 +103,7 @@ var geojson = [
 	            },
 	            "id": "0179c3ac4d9de63c9db070317cdc7e7e"
 	        },
-	        
+
 	        {
 	            "type": "Feature",
 	            "properties": {
@@ -4395,5 +4396,6 @@ var geojson = [
         	"type": "Polygon"
     	},
     	"id": "ee435143c036f792f092735547b64cef"
-	}
-];
+//	}
+//];
+}).addTo(map);
