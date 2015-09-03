@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Load GeoJSON</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+<style>
+	body { margin:0; padding:0; perspective:1400; }
+	#map { 
+		position: absolute; 
+		top:0; 
+		bottom:0; 
+		width: 100%;
+		margin-top: 0px;
+		margin-bottom: 0;
+		transform:rotateX(-40deg); 
+		-webkit-transform:rotateX(-40deg);
+		z-index:1;
+	}
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+  .menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
+    .menu-ui a.active {
+      background:#3887BE;
+      color:#FFF;
+      }
+      .menu-ui a.active:hover {
+        background:#3074a4;
+        }
+</style>
+</head>
+<body>
+<script>L.mapbox.accessToken = 'pk.eyJ1IjoiYWxvcGV4aWQiLCJhIjoiNGRhOGQ0YWJjYWZiNjMwM2YyYmE1OTA1Nzc5ZWI5ODEifQ.qyNsa7LBqCtnA_wredr2UQ';
+</script>
+<div id="controls">
+<!-- control div -->
+	<div id="menu-ui">
+			<a href="#" onclick= "addLayerToMap(lalyersCollection.restrooms);">Restrooms</a>
+			<a href="#" >Portable Toilets</a>
+			<a href="#" >ATM's</a>
+			<a href="#" >EMS </a>
+			<a href="#" >Loading Zones</a>
+			<a href="#" >Parking</a>
+			<a href="#" >Entry / Exit</a>
+	</div>
+</div>
+<div id="map"></div>
+<script src="js/createMap.js"></script>
+<script>
+function addLayer(layer, name, zIndex) {
+    layer
+        .setZIndex(zIndex)
+        .addTo(map);
+
+    // Create a simple layer switcher that
+    // toggles layers on and off.
+    var link = document.createElement('a');
+        link.href = '#';
+        link.className = 'active';
+        link.innerHTML = name;
+
+    link.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (map.hasLayer(layer)) {
+            map.removeLayer(layer);
+            this.className = '';
+        } else {
+            map.addLayer(layer);
+            this.className = 'active';
+        }
+    };
+
+    layers.appendChild(link);
+}
+
+// creating icon class
+var FairIcon = L.Icon.extend({
+    options: {
+        shadowUrl: 'Icons/shadow.png',
+        iconSize:     [50, 50],
+        shadowSize:   [60, 35],
+        iconAnchor:   [25, 50],
+        shadowAnchor: [21, 35],
+        popupAnchor:  [0, -50]
+    }
+});
+
+//creating icons from icon class
+var bathIconPortable = new FairIcon({iconUrl: 'Icons/portabletoilets.png'}),
+    bathIcon = new FairIcon({iconUrl: 'Icons/toiletwgender.png'}),
+    atmIcon = new FairIcon({iconUrl: 'Icons/ATM.png'}),
+    loadingIcon = new FairIcon({iconUrl: 'Icons/loading.png'}),
+    emsIcon = new FairIcon({iconUrl: 'Icons/ems.png'}),
+    redIcon = new FairIcon({iconUrl: 'Icons/redParkingEntrance.png'}),
+    purpleIcon = new FairIcon({iconUrl: 'Icons/purpleParkingEntrance.png'}),
+    yellowIcon = new FairIcon({iconUrl: 'Icons/yellowParkingEntrance.png'}),
+    greenIcon = new FairIcon({iconUrl: 'Icons/greenGate.png'});
+
+//bath icon locatioins
+var restroomsArr = [
+  61.57818, -149.137451,
+  61.578624, -149.134203,
+  61.580009, -149.133521,
+  61.581162, -149.133567,
+  61.581611, -149.132108,
+  61.580933, -149.125687];
+
+//creating bathrooms
+var layersCollection = {
+    restrooms: {
+      name: "Restroom",
+      layers: []
+    }
+  }
+
+  var arrLength = restroomsArr.length;
+  var a = 0;
+  var BATHROOMS = [];
+  for (i=0; i<arrLength; i++) {
+    var layer = L.marker([restroomsArr[i], restroomsArr[i+=1]], {icon: bathIcon});
+    BATHROOMS.push(layer);//pushing the bathroms array item to the variable layer every iteration
+  }
+
+layersCollection.restrooms = BATHROOMS;
+
+function addLayerToMap(layer, message) {
+  layer.addTo(map).bindPopup(message)
+}
+
+function removeLayerFromMap(layer) {
+  if( map.hasLayer(layer)) {
+    map.removeLayer(layer);
+  }
+}
+</script>
+
+
+
+</body>
+</html>
