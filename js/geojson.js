@@ -19,6 +19,7 @@ var geojson = L.mapbox.featureLayer({
 	                "stroke-opacity": 1,
 	                "fill": "#60708b",
 	                "fill-opacity": 1,
+									//"iconCords": [61.579383, -149.135203]
 	            },
 	            "geometry": {
 	                "coordinates": [
@@ -540,7 +541,8 @@ var geojson = L.mapbox.featureLayer({
 	                "stroke-width": 4,
 	                "stroke-opacity": 1,
 	                "fill": "#b0bec5",
-	                "fill-opacity": 1
+	                "fill-opacity": 1,
+									"iconCords": [61.579500, -149.13650]
 	            },
 	            "geometry": {
 	                "coordinates": [
@@ -1681,7 +1683,8 @@ var geojson = L.mapbox.featureLayer({
 	                "stroke-width": 4,
 	                "stroke-opacity": 1,
 	                "fill": "#b0bec5",
-	                "fill-opacity": 1
+	                "fill-opacity": 1,
+									"iconCords": [61.578800, -149.13125]
 	            },
 	            "geometry": {
 	                "coordinates": [
@@ -2378,7 +2381,8 @@ var geojson = L.mapbox.featureLayer({
 	                "stroke-width": "",
 	                "stroke-opacity": "",
 	                "fill": "#d32f2f",
-	                "fill-opacity": .5
+	                "fill-opacity": .5,
+									"iconCords": [61.576500, -149.13594]
 	            },
 	            "geometry": {
 	                "coordinates": [
@@ -2447,7 +2451,8 @@ var geojson = L.mapbox.featureLayer({
 	                "stroke-width": 4,
 	                "stroke-opacity": 1,
 	                "fill": "#b0bec5",
-	                "fill-opacity": 1
+	                "fill-opacity": 1,
+									"iconCords": [61.576800, -149.13165]
 	            },
 	            "geometry": {
 	                "coordinates": [
@@ -2944,7 +2949,8 @@ var geojson = L.mapbox.featureLayer({
 	                "stroke-width": "",
 	                "stroke-opacity": "",
 	                "fill": "#512da8",
-	                "fill-opacity": .5
+	                "fill-opacity": .5,
+									"iconCords": [61.5838591, -149.1201165]
 	            },
 	            "geometry": {
 	                "coordinates": [
@@ -3538,7 +3544,8 @@ var geojson = L.mapbox.featureLayer({
 	                "stroke-width": 4,
 	                "stroke-opacity": 1,
 	                "fill": "#b0bec5",
-	                "fill-opacity": 1
+	                "fill-opacity": 1,
+									"iconCords": [61.579500, -149.13150]
 	            },
 	            "geometry": {
 	                "coordinates": [
@@ -4399,3 +4406,15 @@ var geojson = L.mapbox.featureLayer({
 //	}
 //];
 }).addTo(map);
+
+
+geojson.eachLayer(function(layer) {
+	var featureProperties = layer.feature.properties;
+	if(("iconCords" in featureProperties)) {
+		L.marker([featureProperties.iconCords[0], featureProperties.iconCords[1]], {icon: L.divIcon({
+			className: 'label',
+			html: layer.feature.properties.title,
+			iconSize: [100, 40]
+		})}).addTo(map)
+	}
+});
