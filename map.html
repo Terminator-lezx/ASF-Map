@@ -4,33 +4,30 @@
   <meta charset=utf-8 />
   <title>Alaska State Fair Map</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+  <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
   <link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
   <link href='style/styles.css' rel='stylesheet' />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-  <!-- creating class and properties for icons  -->
-  <script src="js/icons.js"></script>
-
-  <!-- lat lng locations of interactive markers -->
-  <script src="js/iconLocations.js"></script>
-
-  <!-- creating layer objects with internal arrays for grouping locations -->
-  <script src="js/layersCollections.js"></script>
-
-  <!-- static features for map -->
-  <script src="js/geojson.js"></script>
 
 </head>
 <body>
   <!-- map div -->
   <div id='map'></div>
 
+  <!-- static features for map -->
+  <script src="js/geojson.js"></script>
+
   <!-- puting map in map div -->
   <script src="js/createMap.js"></script>
 
-  <!-- adding controls -->
-  <script src="js/controls.js"></script>
+  <!-- creating class and properties for icons  -->
+  <script src="js/icons.js"></script>
+
+  <!-- lat lng locations of markers -->
+  <script src="js/iconLocations.js"></script>
+
+  <!-- creating layer objects with internal arrays for grouping locations -->
+  <script src="js/layersCollections.js"></script>
 
 </body>
 </html>
