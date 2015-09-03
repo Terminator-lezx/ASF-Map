@@ -11,7 +11,8 @@ var mapboxUrl = "http://api.tiles.mapbox.com/v3/mapbox.mapbox-light.jsonp";
 //});
 
 var map = L.mapbox.map('map','mapbox.light');
-  map.setView([61.580651994750504, -149.12893295288086], 16);
+	map.setView([61.580651994750504, -149.12893295288086], 16);
+	L.control.locate().addTo(map);
   //map.layers([layersCollection.restrooms.layers, layersCollection.portables.layers, layersCollection.atms.layers,
   	//layersCollection.ems.layers]);
   //.featureLayer.setGeoJSON(geojson);
